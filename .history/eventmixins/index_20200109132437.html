@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+  <script>
+    let eventMixin = {
+      on(eventName,handler) {
+        if(!this.eventHandlers) this.eventHandlers = {};
+        if(!this.eventHandlers[eventName]) {
+            this.eventHandlers[eventName] = []
+
+        }
+        this.eventHandlers[eventName].push(handler);
+      }
+      trigger(eventName) {
+        console.log(eventName);
+      }
+    };
+    class Menu {
+      choose(value) {
+        this.trigger("select", value);
+      }
+    }
+    Object.assign(Menu.prototype, eventMixin);
+    let menu = new Menu();
+
+    menu.choose(123);
+  </script>
+</html>
